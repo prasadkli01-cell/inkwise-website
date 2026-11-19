@@ -242,6 +242,41 @@
       *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; }
     }
   </style>
+
+  <style id="single-tile-only-mode">
+    /* SINGLE-TILE VIEW: show only the Volume 1 book card. */
+    body > :not(main) { display: none !important; }
+    main > :not(#library) { display: none !important; }
+    #library .container > :not(#bookGrid) { display: none !important; }
+    #library {
+      display: block !important;
+      min-height: 100vh;
+      padding: 28px 16px !important;
+      background: var(--bg);
+    }
+    #library .container {
+      width: 100%;
+      max-width: 430px;
+      margin: 0 auto;
+    }
+    #bookGrid {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) !important;
+      gap: 0 !important;
+      width: 100%;
+      overflow: visible !important;
+      padding: 0 !important;
+      margin: 0 auto !important;
+    }
+    #bookGrid .book-card {
+      width: 100%;
+      max-width: 390px;
+      margin: 0 auto;
+      flex: initial !important;
+    }
+    #emptyState { display: none !important; }
+  </style>
+
 </head>
 
 <body>
@@ -469,6 +504,12 @@
     Volume 1 Small Edition uses the confirmed Amazon.com ASIN and URL.
     Large Edition and the other volumes remain coming soon until links are supplied.
   */
+  // DISPLAY SWITCH:
+  // false = show only Volume 1 on the website.
+  // true  = bring back all book tiles (Volumes 1–4).
+  // When you ask for "Want all others", change this to true.
+  const SHOW_ALL_BOOKS = false;
+
   const BOOKS = [
     {
       id: "car-colouring-book-vol-1",
@@ -590,8 +631,9 @@
   function renderBooks() {
     const term = searchInput.value.trim().toLowerCase();
     const results = BOOKS.filter(book => {
+      const isDisplayed = SHOW_ALL_BOOKS || book.id === "car-colouring-book-vol-1";
       const text = [book.title,book.volume,book.category,book.subcategory,book.description,...(book.tags || [])].join(" ").toLowerCase();
-      return matchesFilter(book) && text.includes(term);
+      return isDisplayed && matchesFilter(book) && text.includes(term);
     });
     grid.innerHTML = results.map(renderBook).join("");
     grid.scrollTo({ left:0, behavior:"auto" });
