@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f2e9">
+  <meta name="description" content="Explore Inkwise — an independent publishing brand creating colouring books, stories, relaxing books and creative activities.">
+  <meta property="og:title" content="Inkwise — A World of Books">
+  <meta property="og:description" content="Creative colouring books, stories, relaxing activities and more.">
+  <meta property="og:image" content="cover.jpg">
+  <title>Inkwise — A World of Books</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,700;1,800&family=Barlow+Condensed:ital,wght@1,700;1,800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: light;
+      --bg:#f6f2e9;
+      --paper:#ffffff;
+      --surface:#fbf9f4;
+      --ink:#171819;
+      --muted:#69665f;
+      --line:#e4ded2;
+      --orange:#c94a12;
+      --orange-dark:#a83a0c;
+      --teal:#327568;
+      --sand:#b9a27a;
+      --shadow:0 12px 28px rgba(39,31,20,.08);
+      --heading:'Barlow Condensed', Impact, sans-serif;
+      --body:'Barlow', Arial, sans-serif;
+    }
+    [data-theme="dark"] {
+      color-scheme:dark;
+      --bg:#15161a;
+      --paper:#1f2127;
+      --surface:#252830;
+      --ink:#f4efe6;
+      --muted:#b9b2a6;
+      --line:#383a42;
+      --orange:#ee6a2c;
+      --orange-dark:#ff8750;
+      --teal:#7fb3a8;
+      --sand:#d8c3a5;
+      --shadow:0 14px 35px rgba(0,0,0,.24);
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:88px; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--body); line-height:1.55; transition:background .2s,color .2s; }
+    a { color:inherit; text-decoration:none; }
+    button,input,select { font:inherit; }
+    img { display:block; max-width:100%; }
+    button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible { outline:3px solid var(--teal); outline-offset:3px; }
+    .container { width:min(1180px,calc(100% - 48px)); margin-inline:auto; }
+    .skip-link { position:absolute; top:-60px; left:12px; z-index:999; padding:10px 14px; background:var(--orange); color:white; }
+    .skip-link:focus { top:12px; }
+
+    .site-header { position:sticky; top:0; z-index:50; background:color-mix(in srgb,var(--bg) 94%,transparent); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+    .nav { min-height:72px; display:flex; align-items:center; justify-content:space-between; gap:22px; }
+    .logo-wrap { width:126px; height:43px; padding:5px 9px; display:flex; align-items:center; justify-content:center; background:#080808; border-radius:6px; flex-shrink:0; }
+    .logo-wrap img { width:100%; height:100%; object-fit:contain; }
+    .nav-links { display:flex; align-items:center; gap:28px; margin-left:auto; color:var(--ink); font-size:13px; font-weight:600; }
+    .nav-links a:hover { color:var(--orange); }
+    .nav-tools { display:flex; gap:8px; align-items:center; }
+    .theme-toggle,.menu-toggle { min-width:40px; height:40px; border:1px solid var(--line); border-radius:50%; background:var(--paper); color:var(--ink); cursor:pointer; }
+    .menu-toggle { display:none; }
+
+    .hero { padding:62px 0 72px; }
+    .hero-grid { display:grid; grid-template-columns:1fr 1.08fr; align-items:center; gap:48px; }
+    .eyebrow,.section-label { color:var(--orange); text-transform:uppercase; letter-spacing:2px; font-size:11px; font-weight:700; }
+    h1,h2,h3,.display { margin-top:0; }
+    h1,h2,.display { font-family:var(--heading); font-style:italic; font-weight:800; text-transform:uppercase; line-height:.98; }
+    h1 { font-size:clamp(52px,6.5vw,86px); margin:16px 0 20px; letter-spacing:-1px; }
+    h1 span { color:var(--orange); }
+    .hero-copy { max-width:520px; color:var(--muted); font-size:16px; line-height:1.7; }
+    .actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:25px; }
+    .btn { display:inline-flex; min-height:44px; align-items:center; justify-content:center; padding:11px 18px; border-radius:6px; border:1px solid var(--line); text-transform:uppercase; letter-spacing:.5px; font-size:11px; font-weight:700; cursor:pointer; transition:transform .2s,background .2s; }
+    .btn:hover { transform:translateY(-2px); }
+    .btn-primary { color:#fff; background:var(--orange); border-color:var(--orange); }
+    .btn-primary:hover { background:var(--orange-dark); }
+    .btn-secondary { background:transparent; color:var(--ink); }
+    .hero-art { min-width:0; }
+    .hero-cover { height:310px; position:relative; border-radius:10px; overflow:hidden; background:#17191d; box-shadow:var(--shadow); border:1px solid var(--line); }
+    .hero-book-slide { position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .65s ease; }
+    .hero-book-slide.active { opacity:1; visibility:visible; }
+    .hero-book-slide img { width:100%; height:100%; object-fit:cover; }
+    .trending-label { position:absolute; top:12px; left:14px; z-index:4; display:inline-flex; align-items:center; padding:5px 9px 5px 8px; border-radius:3px 3px 3px 0; background:var(--orange); color:#fff; font-size:8px; line-height:1; font-weight:800; letter-spacing:1px; text-transform:uppercase; box-shadow:0 3px 9px rgba(0,0,0,.2); }
+    .trending-label::after { content:""; position:absolute; left:0; bottom:-5px; border-top:5px solid var(--orange); border-right:5px solid transparent; }
+    .hero-book-placeholder { display:flex; flex-direction:column; justify-content:space-between; padding:34px 30px 25px; color:#f4efe5; background:repeating-linear-gradient(135deg,#202229 0 18px,#292c34 18px 36px); }
+    .hero-book-placeholder::before { content:""; position:absolute; inset:13px; border:1px solid rgba(244,239,229,.18); pointer-events:none; }
+    .placeholder-kicker,.placeholder-footer { position:relative; z-index:1; color:#d5a17f; font-size:9px; font-weight:800; letter-spacing:2px; }
+    .hero-book-placeholder strong { position:relative; z-index:1; max-width:80%; font-size:clamp(25px,5vw,48px); line-height:.98; font-style:italic; font-weight:900; letter-spacing:-1px; }
+    .placeholder-footer { color:#c8c0b3; }
+    .hero-book-dots { position:absolute; z-index:5; right:14px; bottom:13px; display:flex; gap:5px; }
+    .hero-book-dots span { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.4); }
+    .hero-book-dots span.active { width:16px; border-radius:5px; background:var(--orange); }
+    .mini-collections { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:12px; }
+    .mini-tile { min-height:135px; padding:12px; border-radius:8px; background:repeating-linear-gradient(115deg,var(--paper) 0 12px,var(--surface) 12px 24px); border:1px solid var(--line); border-left:4px solid var(--orange); display:flex; flex-direction:column; justify-content:flex-end; box-shadow:var(--shadow); }
+    .mini-tile strong { font-family:var(--heading); font-style:italic; text-transform:uppercase; font-size:17px; line-height:1; }
+    .mini-tile span { color:var(--muted); font-size:10px; margin-top:5px; }
+    .stripe { height:9px; background:linear-gradient(90deg,var(--orange) 0 34%,var(--teal) 34% 68%,var(--sand) 68% 100%); }
+
+    section { padding:72px 0; }
+    .section-heading { margin-bottom:25px; }
+    h2 { font-size:clamp(38px,5vw,56px); margin:9px 0 8px; }
+    .section-intro { margin:0; color:var(--muted); font-size:14px; }
+    .collections-section { background:var(--bg); }
+    .category-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:26px; }
+    .category-card { background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:20px; min-height:174px; display:flex; flex-direction:column; align-items:flex-start; transition:transform .2s,border-color .2s; }
+    .category-card:hover { transform:translateY(-3px); border-color:var(--orange); }
+    .category-number { font-family:var(--heading); font-style:italic; font-size:30px; line-height:1; color:var(--orange); font-weight:800; }
+    .category-card h3 { font-family:var(--heading); font-style:italic; font-size:19px; text-transform:uppercase; margin:9px 0 6px; }
+    .category-card p { color:var(--muted); font-size:12px; margin:0 0 12px; }
+    .category-link { margin-top:auto; font-size:10px; text-transform:uppercase; letter-spacing:.5px; font-weight:700; border-bottom:1px solid var(--orange); padding-bottom:5px; }
+
+    .library-section { background:var(--paper); }
+    .library-navigation { margin:25px 0 18px; }
+    .filter-row { display:flex; flex-wrap:wrap; gap:8px; margin:0; }
+    .filter-btn { min-height:38px; padding:9px 16px; border-radius:24px; border:1px solid var(--line); color:var(--ink); background:transparent; font-size:11px; font-weight:600; cursor:pointer; transition:background .2s,border-color .2s,color .2s; }
+    .filter-btn.active,.filter-btn:hover { background:var(--orange); color:white; border-color:var(--orange); }
+    .subcategory-panel { display:flex; align-items:center; flex-wrap:wrap; gap:8px; padding:14px 0 2px; margin-top:13px; border-top:1px solid var(--line); }
+    .subcategory-panel[hidden] { display:none !important; }
+    .subcategory-label { width:100%; color:var(--muted); font-size:9px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-bottom:2px; }
+    .subcategory-btn { border:1px solid var(--line); background:var(--surface); color:var(--muted); border-radius:20px; padding:7px 12px; font-size:10px; cursor:pointer; }
+    .subcategory-btn.active,.subcategory-btn:hover { border-color:var(--teal); color:var(--teal); background:color-mix(in srgb,var(--teal) 8%,var(--surface)); }
+    .library-tools { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:15px 0 20px; }
+    .coming-filter { border:1px solid var(--line); border-radius:20px; background:transparent; color:var(--muted); padding:9px 13px; font-size:10px; cursor:pointer; white-space:nowrap; }
+    .coming-filter.active { border-color:var(--orange); color:var(--orange); background:color-mix(in srgb,var(--orange) 8%,var(--bg)); }
+    .search-row { display:flex; gap:10px; flex:1; min-width:180px; }
+    .search-input { width:100%; min-height:43px; border:1px solid var(--line); background:var(--bg); color:var(--ink); border-radius:6px; padding:10px 13px; }
+    /* Library-only horizontal slider. Book tile styling remains unchanged. */
+    .book-grid { display:flex; gap:17px; overflow-x:auto; overflow-y:hidden; padding:2px 2px 12px; scroll-snap-type:x mandatory; scroll-behavior:smooth; -webkit-overflow-scrolling:touch; scrollbar-width:none; overscroll-behavior-inline:contain; }
+    .book-grid::-webkit-scrollbar { display:none; }
+    .book-card { flex:0 0 calc((100% - 34px)/3); scroll-snap-align:start; background:var(--bg); border:1px solid var(--line); border-radius:9px; overflow:hidden; display:flex; flex-direction:column; min-width:0; }
+    .library-slider-controls { display:flex; justify-content:flex-end; gap:8px; margin:-5px 0 12px; }
+    .library-slider-btn { width:36px; height:36px; border:1px solid var(--line); border-radius:50%; background:var(--bg); color:var(--ink); cursor:pointer; font-size:19px; line-height:1; display:grid; place-items:center; }
+    .library-slider-btn:hover:not(:disabled) { background:var(--orange); border-color:var(--orange); color:#fff; }
+    .library-slider-btn:disabled { opacity:.35; cursor:default; }
+    .book-image { width:100%; aspect-ratio:1.375; max-height:320px; background:var(--surface); display:flex; align-items:center; justify-content:center; padding:12px; transition:aspect-ratio .25s ease; }
+    .book-image.portrait { aspect-ratio:8.5 / 11; max-height:390px; }
+    .book-image img { width:100%; height:100%; object-fit:contain; }
+    .placeholder-cover { width:100%; height:100%; display:grid; place-items:center; text-align:center; padding:12px; box-sizing:border-box; background:repeating-linear-gradient(135deg,#282b32 0 18px,#202229 18px 36px); color:#f6f2e9; font-family:var(--heading); font-style:italic; font-size:clamp(28px,5vw,70px); }
+    .placeholder-cover small { display:block; margin-top:8px; font:700 9px/1.4 var(--body); letter-spacing:1.5px; color:var(--sand); }
+    .book-body { padding:17px; display:flex; flex-direction:column; flex:1; }
+    .book-kicker { color:var(--orange); text-transform:uppercase; font-size:9px; font-weight:700; letter-spacing:1.4px; }
+    .book-body h3 { font-family:var(--heading); font-style:italic; text-transform:uppercase; font-size:24px; line-height:1.05; margin:7px 0 3px; }
+    .book-volume { color:var(--muted); font-size:10px; text-transform:uppercase; letter-spacing:1px; }
+    .book-description { color:var(--muted); font-size:12px; margin:12px 0; }
+    .tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:14px; }
+    .tag { background:var(--surface); border:1px solid var(--line); color:var(--muted); border-radius:3px; padding:4px 7px; font-size:9px; }
+    .book-status { font-size:9px; text-transform:uppercase; letter-spacing:1px; color:var(--teal); font-weight:700; margin-bottom:10px; }
+    .book-status.soon { color:var(--sand); }
+    .edition-box { border-top:1px solid var(--line); padding-top:12px; margin-top:auto; }
+    .edition-title { font-size:10px; font-weight:700; margin-bottom:8px; text-transform:uppercase; }
+    .edition-options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin:8px 0 10px; }
+    .edition-option { min-width:0; text-align:left; padding:10px; border:1px solid var(--line); border-radius:7px; background:var(--paper); color:var(--ink); cursor:pointer; transition:border-color .2s,background .2s; }
+    .edition-option.active { border:2px solid var(--orange); padding:9px; background:color-mix(in srgb,var(--orange) 7%,var(--paper)); }
+    .edition-option strong { display:block; font-size:11px; }
+    .edition-option small { display:block; color:var(--muted); font-size:9px; margin-top:4px; }
+    .edition-option:focus-visible { outline:2px solid var(--teal); outline-offset:3px; }
+    .edition-action { display:flex; align-items:center; justify-content:center; width:100%; min-height:42px; padding:10px 12px; border-radius:6px; background:var(--orange); color:#fff; font-size:11px; font-weight:700; line-height:1.3; text-align:center; text-decoration:none; border:0; }
+    .edition-action:hover { filter:brightness(.92); }
+    .edition-action.disabled { background:var(--surface); color:var(--muted); border:1px solid var(--line); cursor:default; }
+    .empty-state { color:var(--muted); padding:25px 0; }
+
+    .values-section { background:var(--bg); }
+    .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:25px; }
+    .value-card { padding:20px; min-height:145px; border:1px solid var(--line); border-top:3px solid var(--orange); border-radius:7px; background:var(--paper); }
+    .value-card .number { color:var(--orange); font-family:var(--heading); font-style:italic; font-size:25px; }
+    .value-card h3 { font-family:var(--heading); font-style:italic; text-transform:uppercase; font-size:19px; margin:5px 0; }
+    .value-card p { color:var(--muted); font-size:11px; margin:0; }
+
+    .feature-section { background:var(--paper); }
+    .feature-layout { display:grid; grid-template-columns:.85fr 1.15fr; gap:35px; align-items:center; }
+    .feature-image { background:#17191d; border-radius:9px; overflow:hidden; min-height:240px; }
+    .feature-image img { width:100%; height:100%; object-fit:cover; }
+    .feature-copy p { color:var(--muted); font-size:13px; }
+    .feature-copy h2 { font-size:clamp(38px,4.5vw,52px); }
+
+    .store-section { background:var(--bg); text-align:center; }
+    .store-panel { max-width:700px; margin:auto; }
+    .store-panel h2 { font-size:clamp(38px,5vw,58px); }
+    .store-controls { display:flex; gap:10px; margin:20px auto 0; max-width:560px; }
+    .store-select { flex:1; min-width:0; min-height:44px; padding:10px; border:1px solid var(--line); border-radius:5px; background:var(--paper); color:var(--ink); }
+    .store-note { color:var(--muted); font-size:11px; margin-top:12px; }
+
+    .closing { background:var(--paper); text-align:center; padding:65px 0; }
+    .closing h2 { max-width:650px; margin:10px auto 18px; font-size:clamp(42px,6vw,68px); }
+    .closing p { color:var(--muted); font-size:13px; max-width:550px; margin:0 auto 20px; }
+    footer { background:var(--bg); border-top:1px solid var(--line); padding:26px 0; }
+    .footer-top { display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
+    .footer-links { display:flex; gap:17px; flex-wrap:wrap; color:var(--muted); font-size:11px; }
+    .copyright,.disclaimer { color:var(--muted); font-size:10px; margin:16px 0 0; }
+
+    @media (max-width:850px) {
+      .hero-grid { gap:25px; }
+      .hero-cover { height:260px; }
+      .nav-links { gap:15px; }
+      .category-grid { grid-template-columns:repeat(2,1fr); }
+      .book-card { flex-basis:calc((100% - 17px)/2); }
+    }
+    @media (max-width:620px) {
+      .container { width:calc(100% - 30px); }
+      .nav { min-height:64px; }
+      .logo-wrap { width:110px; height:39px; }
+      .menu-toggle { display:inline-block; }
+      .nav-links { display:none; position:absolute; top:64px; left:0; right:0; padding:17px 20px; background:var(--bg); border-bottom:1px solid var(--line); flex-direction:column; align-items:flex-start; gap:15px; }
+      .nav-links.open { display:flex; }
+      .hero { padding:43px 0 48px; }
+      .hero-grid { grid-template-columns:1fr; gap:27px; }
+      h1 { font-size:clamp(53px,14vw,76px); }
+      .hero-cover { height:auto; aspect-ratio:1.25; }
+      .mini-tile { min-height:105px; padding:9px; }
+      .mini-tile strong { font-size:14px; }
+      section { padding:52px 0; }
+      .category-grid,.values-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+      .filter-row { gap:7px; }
+      .filter-btn { padding:8px 12px; font-size:10px; }
+      .subcategory-panel { gap:7px; }
+      .library-tools { align-items:stretch; flex-direction:column; }
+      .coming-filter { align-self:flex-start; }
+      .book-grid { gap:10px; }
+      .book-card { flex-basis:82%; }
+      .category-card { min-height:165px; padding:14px; }
+      .category-card h3 { font-size:16px; }
+      .category-card p { font-size:11px; }
+      .book-body { padding:12px; }
+      .book-body h3 { font-size:20px; }
+      .feature-layout { grid-template-columns:1fr; }
+      .feature-image { min-height:190px; }
+      .store-controls { flex-direction:column; }
+      .footer-top { align-items:flex-start; flex-direction:column; }
+    }
+    @media (max-width:390px) {
+      .category-grid,.values-grid { grid-template-columns:1fr; }
+      .book-card { flex-basis:86%; }
+      .mini-collections { gap:7px; }
+      .mini-tile { min-height:92px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; }
+    }
+  </style>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="logo-wrap" href="#home" aria-label="Inkwise home">
+      <img src="logo.png" alt="Inkwise">
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#collections">Collections</a>
+      <a href="#library">Books</a>
+      <a href="#about">About Inkwise</a>
+      <a href="#store">Choose Store</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" title="Toggle theme">☾</button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Independent publishing brand</div>
+        <h1>A world of<br>books.<br><span>Endless<br>possibilities.</span></h1>
+        <p class="hero-copy">From creative colouring books to engaging stories, relaxing activities and more, discover a growing collection of books from Inkwise.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#library">Explore our books</a>
+          <a class="btn btn-secondary" href="#about">Discover Inkwise</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="hero-cover" id="heroBookSlider" aria-label="Trending Books">
+          <span class="trending-label">Trending Books</span>
+          <div class="hero-book-slide active">
+            <img src="volume-1-small.jpg" alt="Inkwise Car Colouring Book Volume 1 Small Edition cover">
+          </div>
+          <div class="hero-book-slide">
+            <img src="volume-2-small.jpg" alt="Inkwise Vintage Car Colouring Book Volume 2 Small Edition cover">
+          </div>
+          <div class="hero-book-dots" aria-hidden="true">
+            <span class="active"></span><span></span>
+          </div>
+        </div>
+        <div class="mini-collections">
+          <a class="mini-tile" href="#library" data-filter-link="Colouring Books"><strong>Colouring Books</strong><span>Explore collection</span></a>
+          <a class="mini-tile" href="#library" data-filter-link="Activity Books"><strong>Activity Books</strong><span>Coming collection</span></a>
+          <a class="mini-tile" href="#library" data-filter-link="Relaxing and Reading Books"><strong>Relaxing &amp; Reading</strong><span>Coming collection</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stripe"></div>
+
+  <section class="collections-section" id="collections">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-label">Collections</div>
+        <h2>Explore our collections.</h2>
+        <p class="section-intro">Different interests. Different experiences. One growing world of books.</p>
+      </div>
+      <div class="category-grid">
+        <a class="category-card" href="#library" data-filter-link="Colouring Books">
+          <div class="category-number">01</div><h3>Colouring Books</h3>
+          <p>Creative colouring experiences for different interests, ages and styles.</p><span class="category-link">Explore →</span>
+        </a>
+        <a class="category-card" href="#library" data-filter-link="Activity Books">
+          <div class="category-number">02</div><h3>Activity Books</h3>
+          <p>Puzzles, challenges, tasks and engaging activities.</p><span class="category-link">Explore · Coming soon →</span>
+        </a>
+        <a class="category-card" href="#library" data-filter-link="Relaxing and Reading Books">
+          <div class="category-number">03</div><h3>Relaxing and Reading Books</h3>
+          <p>Calming creative experiences, stories and enjoyable reading.</p><span class="category-link">Explore · Coming soon →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="library-section" id="library">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-label">Library</div>
+        <h2>The Inkwise library.</h2>
+        <p class="section-intro">Discover the books that bring every Inkwise collection to life.</p>
+      </div>
+      <div class="library-navigation">
+        <div class="filter-row" id="filters" aria-label="Main book categories">
+          <button class="filter-btn active" data-filter="All">All Books</button>
+          <button class="filter-btn" data-filter="Colouring Books">Colouring Books</button>
+          <button class="filter-btn" data-filter="Activity Books">Activity Books</button>
+          <button class="filter-btn" data-filter="Relaxing and Reading Books">Relaxing &amp; Reading Books</button>
+        </div>
+        <div class="subcategory-panel" id="colouringSubcategories" hidden aria-label="Colouring book subcategories">
+          <div class="subcategory-label">Explore colouring books by category</div>
+          <button class="subcategory-btn active" data-subcategory="All">All Colouring Books</button>
+          <button class="subcategory-btn" data-subcategory="Vehicles">Vehicles</button>
+          <button class="subcategory-btn" data-subcategory="Kids Special">Kids Special</button>
+          <button class="subcategory-btn" data-subcategory="Animals &amp; Nature">Animals &amp; Nature</button>
+          <button class="subcategory-btn" data-subcategory="Relaxation &amp; Mandalas">Relaxation &amp; Mandalas</button>
+          <button class="subcategory-btn" data-subcategory="Architecture &amp; Places">Architecture &amp; Places</button>
+          <button class="subcategory-btn" data-subcategory="Fantasy &amp; Imagination">Fantasy &amp; Imagination</button>
+        </div>
+      </div>
+      <div class="library-tools">
+        <div class="search-row">
+          <input class="search-input" id="bookSearch" type="search" placeholder="Search books and collections..." aria-label="Search books">
+        </div>
+        <button class="coming-filter" id="comingFilter" type="button" aria-pressed="false">Coming Soon</button>
+      </div>
+      <div class="library-slider-controls" aria-label="Library slider controls">
+        <button class="library-slider-btn" id="libraryPrev" type="button" aria-label="Previous books">‹</button>
+        <button class="library-slider-btn" id="libraryNext" type="button" aria-label="Next books">›</button>
+      </div>
+      <div class="book-grid" id="bookGrid" aria-live="polite" tabindex="0" aria-label="Books. Swipe or scroll horizontally to browse."></div>
+      <p class="empty-state" id="emptyState" hidden>No books found in this collection yet.</p>
+    </div>
+  </section>
+
+  <div class="stripe"></div>
+
+  <section class="values-section">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-label">The Inkwise spirit</div>
+        <h2>More than just books.</h2>
+        <p class="section-intro">Every Inkwise collection is designed around creativity, discovery and enjoyable experiences.</p>
+      </div>
+      <div class="values-grid">
+        <article class="value-card"><div class="number">01</div><h3>Creative variety</h3><p>Different themes and formats for different interests.</p></article>
+        <article class="value-card"><div class="number">02</div><h3>Growing collections</h3><p>A publishing catalogue that grows with fresh ideas.</p></article>
+        <article class="value-card"><div class="number">03</div><h3>Made for exploration</h3><p>Books that encourage readers to discover, imagine and enjoy.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section" id="about">
+    <div class="container feature-layout">
+      <div class="feature-image"><img src="cover.jpg" alt="Car Colouring Book from the Inkwise Vehicles collection"></div>
+      <div class="feature-copy">
+        <div class="section-label">Featured collection</div>
+        <h2>The car collection.</h2>
+        <p>Explore the Inkwise vehicle collection, starting with our Car Colouring Book. A creative experience for automotive enthusiasts and colouring fans.</p>
+        <p>Choose between the compact Small Edition and the larger Large Edition when both editions are available.</p>
+        <div class="actions"><a class="btn btn-primary" href="#library" data-filter-link="Vehicles">Explore vehicle books →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="store-section" id="store">
+    <div class="container store-panel">
+      <div class="section-label">Find your edition</div>
+      <h2>Find your book on Amazon.</h2>
+      <p class="section-intro">Choose your preferred Amazon marketplace to open the correct store when purchase links are available.</p>
+      <div class="store-controls">
+        <select class="store-select" id="marketplace" aria-label="Choose Amazon marketplace">
+          <option value="com">Amazon.com — United States</option>
+          <option value="co.uk">Amazon.co.uk — United Kingdom</option>
+          <option value="de">Amazon.de — Germany</option>
+          <option value="fr">Amazon.fr — France</option>
+          <option value="it">Amazon.it — Italy</option>
+          <option value="es">Amazon.es — Spain</option>
+          <option value="ca">Amazon.ca — Canada</option>
+          <option value="com.au">Amazon.com.au — Australia</option>
+          <option value="nl">Amazon.nl — Netherlands</option>
+          <option value="se">Amazon.se — Sweden</option>
+          <option value="pl">Amazon.pl — Poland</option>
+          <option value="co.jp">Amazon.co.jp — Japan</option>
+        </select>
+        <a class="btn btn-primary" href="#library">Browse books →</a>
+      </div>
+      <p class="store-note">Shopping from India? Choose Amazon.com. Inkwise paperbacks are not currently listed on Amazon.in; international shipping may apply.</p>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="container">
+      <div class="section-label">Discover Inkwise</div>
+      <h2>Your next read starts here.</h2>
+      <p>Explore the growing world of Inkwise books and find something made for your interests.</p>
+      <a class="btn btn-primary" href="#library">Explore the bookshelf →</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <a class="logo-wrap" href="#home" aria-label="Inkwise home"><img src="logo.png" alt="Inkwise"></a>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#home">Home</a><a href="#collections">Collections</a><a href="#library">Books</a><a href="#about">About Inkwise</a><a href="#store">Choose Store</a>
+      </nav>
+    </div>
+    <p class="copyright">© 2026 Inkwise. All rights reserved.</p>
+    <p class="disclaimer">Car names, where shown, are used for identification only. Inkwise is not affiliated with any car manufacturer. Books are sold by Amazon.</p>
+  </div>
+</footer>
+
+<script>
+  /*
+    BOOK CATALOGUE
+    Add and edit books here. Each edition can have its own ASIN and cover.
+    Volume 1 Small Edition uses the confirmed Amazon.com ASIN and URL.
+    Large Edition and the other volumes remain coming soon until links are supplied.
+  */
+  // DISPLAY SWITCH:
+  // false = show only Volume 1 on the website.
+  // true  = bring back all book tiles (Volumes 1–4).
+  // When you ask for "Want all others", change this to true.
+  const SHOW_ALL_BOOKS = true;
+
+  const BOOKS = [
+    {
+      id: "car-colouring-book-vol-1",
+      title: "Car Colouring Book",
+      volume: "Volume 1",
+      category: "Colouring Books",
+      subcategory: "Vehicles",
+      status: "available",
+      cover: "volume-1-small.jpg",
+      description: "Modified, sports and classic cars in bold colouring-page designs.",
+      tags: ["30 car designs", "Single-sided pages", "Ages 8+"],
+      editions: [
+        { name: "Small Edition", size: "8.25 × 6 inch", orientation: "Landscape", asin: "B0HRP47QFD", url: "https://www.amazon.com/dp/B0HRP47QFD", cover: "volume-1-small.jpg" },
+        { name: "Large Edition", size: "8.5 × 11 inch", orientation: "Portrait", asin: "", cover: "volume-1-large.jpg" }
+      ]
+    },
+    {
+      id: "vintage-car-colouring-book-vol-2",
+      title: "Vintage Car Colouring Book",
+      volume: "Volume 2",
+      category: "Colouring Books",
+      subcategory: "Vehicles",
+      status: "coming",
+      number: "02",
+      cover: "volume-2-small.jpg",
+      description: "A vintage-inspired collection celebrating timeless classic cars.",
+      tags: ["45 original designs", "Classic cars", "Vehicles"],
+      // Editions are intentionally hidden until this volume is available.
+      editions: []
+    },
+    {
+      id: "inkwise-volume-3",
+      title: "New Collection",
+      volume: "Volume 3",
+      category: "Colouring Books",
+      subcategory: "Vehicles",
+      status: "coming",
+      number: "03",
+      description: "A new Inkwise colouring book is on the way. More details coming soon.",
+      tags: ["Coming soon"],
+      editions: []
+    },
+    {
+      id: "inkwise-volume-4",
+      title: "New Collection",
+      volume: "Volume 4",
+      category: "Colouring Books",
+      subcategory: "Vehicles",
+      status: "coming",
+      number: "04",
+      description: "Another new Inkwise colouring book is in development. Stay tuned.",
+      tags: ["Coming soon"],
+      editions: []
+    }
+  ];
+
+  const grid = document.getElementById("bookGrid");
+  const searchInput = document.getElementById("bookSearch");
+  const emptyState = document.getElementById("emptyState");
+  const filterButtons = [...document.querySelectorAll(".filter-btn")];
+  const subcategoryButtons = [...document.querySelectorAll(".subcategory-btn")];
+  const subcategoryPanel = document.getElementById("colouringSubcategories");
+  const comingFilter = document.getElementById("comingFilter");
+  let activeFilter = "All";
+  let activeSubcategory = "All";
+  let comingOnly = false;
+
+  function esc(value) {
+    return String(value ?? "").replace(/[&<>"']/g, c => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    })[c]);
+  }
+
+  function amazonUrl(asin) {
+    return `https://www.amazon.${document.getElementById("marketplace").value}/dp/${encodeURIComponent(asin)}`;
+  }
+
+  const selectedEditions = Object.create(null);
+
+  function renderBook(book) {
+    const editions = book.editions || [];
+    const selectedIndex = Math.min(selectedEditions[book.id] || 0, Math.max(0, editions.length - 1));
+    const selectedEdition = editions[selectedIndex];
+    const isPortrait = selectedEdition && /portrait/i.test(selectedEdition.orientation || "");
+    const coverSrc = selectedEdition ? (selectedEdition.cover || (selectedIndex === 0 ? book.cover : "")) : book.cover;
+    const image = coverSrc
+      ? `<img src="${esc(coverSrc)}" alt="${esc(book.title)} ${selectedEdition ? esc(selectedEdition.name) : ""} cover" onerror="this.style.display='none';this.nextElementSibling.hidden=false"><div class="placeholder-cover" hidden>${esc(book.number || "IW")}</div>`
+      : `<div class="placeholder-cover">${esc(book.number || "IW")}<small>${selectedEdition ? esc(selectedEdition.orientation).toUpperCase() + " COVER ART PREVIEW" : "COVER PREVIEW"}</small></div>`;
+    const tags = (book.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join("");
+    const editionUI = editions.length ? `<div class="edition-box">
+      <div class="edition-title">Choose your edition</div>
+      <div class="edition-options" role="group" aria-label="Choose book edition">
+        ${editions.map((edition, index) => `<button type="button" class="edition-option ${index === selectedIndex ? "active" : ""}" data-book-id="${esc(book.id)}" data-edition-index="${index}" aria-pressed="${index === selectedIndex}"><strong>${esc(edition.name)}</strong><small>${esc(edition.size)} · ${esc(edition.orientation)}</small></button>`).join("")}
+      </div>
+      ${selectedEdition && selectedEdition.asin ? `<a class="edition-action" href="${esc(selectedEdition.url || amazonUrl(selectedEdition.asin))}" target="_blank" rel="noopener noreferrer">Buy ${esc(selectedEdition.name)} on Amazon ↗</a>` : `<span class="edition-action disabled" aria-disabled="true">${selectedEdition ? esc(selectedEdition.name) + " · Coming Soon" : "Edition details coming soon"}</span>`}
+    </div>` : "";
+    return `<article class="book-card">
+      <div class="book-image ${isPortrait ? "portrait" : "landscape"}">${image}</div>
+      <div class="book-body">
+        <div class="book-kicker">${esc(book.category)} / ${esc(book.subcategory || "Collection")}</div>
+        <h3>${esc(book.title)}</h3>
+        <div class="book-volume">${esc(book.volume || "")}</div>
+        <p class="book-description">${esc(book.description || "")}</p>
+        <div class="tags">${tags}</div>
+        <div class="book-status ${book.status === "coming" ? "soon" : ""}">${book.status === "coming" ? "Coming soon" : "Available"}</div>
+        ${editionUI}
+      </div>
+    </article>`;
+  }
+
+  function matchesFilter(book) {
+    if (comingOnly && book.status !== "coming") return false;
+    if (activeFilter === "All") return true;
+    if (book.category !== activeFilter) return false;
+    if (activeFilter === "Colouring Books" && activeSubcategory !== "All") {
+      return book.subcategory === activeSubcategory;
+    }
+    return true;
+  }
+
+  function renderBooks() {
+    const term = searchInput.value.trim().toLowerCase();
+    const results = BOOKS.filter(book => {
+      const isDisplayed = SHOW_ALL_BOOKS || book.id === "car-colouring-book-vol-1";
+      const text = [book.title,book.volume,book.category,book.subcategory,book.description,...(book.tags || [])].join(" ").toLowerCase();
+      return isDisplayed && matchesFilter(book) && text.includes(term);
+    });
+    grid.innerHTML = results.map(renderBook).join("");
+    grid.scrollTo({ left:0, behavior:"auto" });
+    emptyState.hidden = results.length > 0;
+    updateLibrarySliderButtons();
+  }
+
+  // Horizontal navigation is limited to the Library book tiles only.
+  const libraryPrev = document.getElementById("libraryPrev");
+  const libraryNext = document.getElementById("libraryNext");
+
+  function updateLibrarySliderButtons() {
+    const maxScroll = grid.scrollWidth - grid.clientWidth;
+    libraryPrev.disabled = grid.scrollLeft <= 2;
+    libraryNext.disabled = grid.scrollLeft >= maxScroll - 2;
+  }
+
+  libraryPrev.addEventListener("click", () => {
+    grid.scrollBy({ left:-Math.max(240, grid.clientWidth * 0.8), behavior:"smooth" });
+  });
+  libraryNext.addEventListener("click", () => {
+    grid.scrollBy({ left:Math.max(240, grid.clientWidth * 0.8), behavior:"smooth" });
+  });
+  grid.addEventListener("scroll", updateLibrarySliderButtons, { passive:true });
+  window.addEventListener("resize", updateLibrarySliderButtons);
+  grid.addEventListener("click", event => {
+    const option = event.target.closest(".edition-option");
+    if (!option) return;
+    selectedEditions[option.dataset.bookId] = Number(option.dataset.editionIndex) || 0;
+    renderBooks();
+  });
+
+  function setFilter(filter) {
+    const subcategoryNames = ["Vehicles", "Kids Special", "Animals & Nature", "Relaxation & Mandalas", "Architecture & Places", "Fantasy & Imagination"];
+    if (subcategoryNames.includes(filter)) {
+      activeFilter = "Colouring Books";
+      activeSubcategory = filter;
+    } else {
+      activeFilter = filter;
+      activeSubcategory = "All";
+    }
+    filterButtons.forEach(button => button.classList.toggle("active", button.dataset.filter === activeFilter));
+    subcategoryPanel.hidden = activeFilter !== "Colouring Books";
+    subcategoryButtons.forEach(button => button.classList.toggle("active", button.dataset.subcategory === activeSubcategory));
+    renderBooks();
+  }
+
+  filterButtons.forEach(button => button.addEventListener("click", () => setFilter(button.dataset.filter)));
+  subcategoryButtons.forEach(button => button.addEventListener("click", () => {
+    activeSubcategory = button.dataset.subcategory;
+    subcategoryButtons.forEach(item => item.classList.toggle("active", item === button));
+    renderBooks();
+  }));
+  comingFilter.addEventListener("click", () => {
+    comingOnly = !comingOnly;
+    comingFilter.classList.toggle("active", comingOnly);
+    comingFilter.setAttribute("aria-pressed", String(comingOnly));
+    renderBooks();
+  });
+  document.querySelectorAll("[data-filter-link]").forEach(link => {
+    link.addEventListener("click", () => {
+      const filter = link.dataset.filterLink;
+      setFilter(filter);
+    });
+  });
+  searchInput.addEventListener("input", renderBooks);
+  document.getElementById("marketplace").addEventListener("change", renderBooks);
+
+  // Light mode is the default; remember a user's explicit theme choice.
+  const themeToggle = document.getElementById("themeToggle");
+  function setTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    themeToggle.textContent = theme === "dark" ? "☀" : "☾";
+    themeToggle.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+    try { localStorage.setItem("inkwise-theme", theme); } catch (_) {}
+  }
+  let savedTheme = "";
+  try { savedTheme = localStorage.getItem("inkwise-theme") || ""; } catch (_) {}
+  setTheme(savedTheme === "dark" ? "dark" : "light");
+  themeToggle.addEventListener("click", () => {
+    setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+  });
+
+  // Marketplace preference and sensible browser-language defaults.
+  const marketplace = document.getElementById("marketplace");
+  const marketOptions = [...marketplace.options].map(o => o.value);
+  function suggestedMarket() {
+    const lang = (navigator.language || "").toLowerCase();
+    if (lang.includes("en-gb")) return "co.uk";
+    if (lang.startsWith("de")) return "de";
+    if (lang.startsWith("fr")) return "fr";
+    if (lang.startsWith("it")) return "it";
+    if (lang.startsWith("es")) return "es";
+    if (lang.includes("en-ca")) return "ca";
+    if (lang.includes("en-au")) return "com.au";
+    if (lang.startsWith("ja")) return "co.jp";
+    return "com";
+  }
+  try {
+    const savedMarket = localStorage.getItem("inkwise-marketplace");
+    marketplace.value = marketOptions.includes(savedMarket) ? savedMarket : suggestedMarket();
+  } catch (_) { marketplace.value = suggestedMarket(); }
+  marketplace.addEventListener("change", () => {
+    try { localStorage.setItem("inkwise-marketplace", marketplace.value); } catch (_) {}
+    renderBooks();
+  });
+
+  // Mobile navigation
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+  menuToggle.addEventListener("click", () => {
+    const isOpen = navLinks.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+    menuToggle.textContent = isOpen ? "×" : "☰";
+  });
+  navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.textContent = "☰";
+  }));
+
+  // Trending Books carousel: automatically loops between the two landscape editions.
+  const heroSlider = document.getElementById("heroBookSlider");
+  if (heroSlider) {
+    const heroSlides = [...heroSlider.querySelectorAll(".hero-book-slide")];
+    const heroDots = [...heroSlider.querySelectorAll(".hero-book-dots span")];
+    let heroSlideIndex = 0;
+    window.setInterval(() => {
+      heroSlides[heroSlideIndex].classList.remove("active");
+      if (heroDots[heroSlideIndex]) heroDots[heroSlideIndex].classList.remove("active");
+      heroSlideIndex = (heroSlideIndex + 1) % heroSlides.length;
+      heroSlides[heroSlideIndex].classList.add("active");
+      if (heroDots[heroSlideIndex]) heroDots[heroSlideIndex].classList.add("active");
+    }, 3000);
+  }
+
+  renderBooks();
+</script>
+</body>
+</html>
