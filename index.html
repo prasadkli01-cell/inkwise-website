@@ -242,41 +242,6 @@
       *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; }
     }
   </style>
-
-  <style id="single-tile-only-mode">
-    /* SINGLE-TILE VIEW: show only the Volume 1 book card. */
-    body > :not(main) { display: none !important; }
-    main > :not(#library) { display: none !important; }
-    #library .container > :not(#bookGrid) { display: none !important; }
-    #library {
-      display: block !important;
-      min-height: 100vh;
-      padding: 28px 16px !important;
-      background: var(--bg);
-    }
-    #library .container {
-      width: 100%;
-      max-width: 430px;
-      margin: 0 auto;
-    }
-    #bookGrid {
-      display: grid !important;
-      grid-template-columns: minmax(0, 1fr) !important;
-      gap: 0 !important;
-      width: 100%;
-      overflow: visible !important;
-      padding: 0 !important;
-      margin: 0 auto !important;
-    }
-    #bookGrid .book-card {
-      width: 100%;
-      max-width: 390px;
-      margin: 0 auto;
-      flex: initial !important;
-    }
-    #emptyState { display: none !important; }
-  </style>
-
 </head>
 
 <body>
@@ -314,33 +279,16 @@
         </div>
       </div>
       <div class="hero-art">
-        <div class="hero-cover" id="heroBookSlider" aria-label="Trending books">
+        <div class="hero-cover" id="heroBookSlider" aria-label="Trending Books">
           <span class="trending-label">Trending Books</span>
           <div class="hero-book-slide active">
-            <img src="cover.jpg" alt="Inkwise Car Colouring Book cover" onerror="this.style.display='none'">
+            <img src="volume-1-small.jpg" alt="Inkwise Car Colouring Book Volume 1 Small Edition cover">
           </div>
-          <div class="hero-book-slide hero-book-placeholder">
-            <span class="placeholder-kicker">INKWISE · BOOK 02</span>
-            <strong>YOUR NEXT<br>FAVOURITE BOOK</strong>
-            <span class="placeholder-footer">COVER PREVIEW</span>
-          </div>
-          <div class="hero-book-slide hero-book-placeholder">
-            <span class="placeholder-kicker">INKWISE · BOOK 03</span>
-            <strong>MORE TO<br>COLOUR. MORE<br>TO DISCOVER.</strong>
-            <span class="placeholder-footer">COVER PREVIEW</span>
-          </div>
-          <div class="hero-book-slide hero-book-placeholder">
-            <span class="placeholder-kicker">INKWISE · BOOK 04</span>
-            <strong>A NEW<br>ADVENTURE<br>AWAITS.</strong>
-            <span class="placeholder-footer">COVER PREVIEW</span>
-          </div>
-          <div class="hero-book-slide hero-book-placeholder">
-            <span class="placeholder-kicker">INKWISE · BOOK 05</span>
-            <strong>COMING<br>SOON.</strong>
-            <span class="placeholder-footer">COVER PREVIEW</span>
+          <div class="hero-book-slide">
+            <img src="volume-2-small.jpg" alt="Inkwise Vintage Car Colouring Book Volume 2 Small Edition cover">
           </div>
           <div class="hero-book-dots" aria-hidden="true">
-            <span class="active"></span><span></span><span></span><span></span><span></span>
+            <span class="active"></span><span></span>
           </div>
         </div>
         <div class="mini-collections">
@@ -508,7 +456,7 @@
   // false = show only Volume 1 on the website.
   // true  = bring back all book tiles (Volumes 1–4).
   // When you ask for "Want all others", change this to true.
-  const SHOW_ALL_BOOKS = false;
+  const SHOW_ALL_BOOKS = true;
 
   const BOOKS = [
     {
@@ -518,12 +466,12 @@
       category: "Colouring Books",
       subcategory: "Vehicles",
       status: "available",
-      cover: "cover.jpg",
+      cover: "volume-1-small.jpg",
       description: "Modified, sports and classic cars in bold colouring-page designs.",
       tags: ["30 car designs", "Single-sided pages", "Ages 8+"],
       editions: [
-        { name: "Small Edition", size: "8.25 × 6 inch", orientation: "Landscape", asin: "B0HRP47QFD", url: "https://www.amazon.com/dp/B0HRP47QFD", cover: "cover.jpg" },
-        { name: "Large Edition", size: "8.5 × 11 inch", orientation: "Portrait", asin: "", cover: "" }
+        { name: "Small Edition", size: "8.25 × 6 inch", orientation: "Landscape", asin: "B0HRP47QFD", url: "https://www.amazon.com/dp/B0HRP47QFD", cover: "volume-1-small.jpg" },
+        { name: "Large Edition", size: "8.5 × 11 inch", orientation: "Portrait", asin: "", cover: "volume-1-large.jpg" }
       ]
     },
     {
@@ -534,32 +482,36 @@
       subcategory: "Vehicles",
       status: "coming",
       number: "02",
-      description: "A future collection celebrating timeless classic cars.",
-      tags: ["Classic cars", "Vehicles", "Coming soon"],
-      editions: []
+      cover: "volume-2-small.jpg",
+      description: "A vintage-inspired collection celebrating timeless classic cars.",
+      tags: ["45 original designs", "Classic cars", "Vehicles"],
+      editions: [
+        { name: "Small Edition", size: "8.25 × 6 inch", orientation: "Landscape", asin: "", cover: "volume-2-small.jpg" },
+        { name: "Large Edition", size: "8.5 × 11 inch", orientation: "Portrait", asin: "", cover: "volume-2-large.jpg" }
+      ]
     },
     {
-      id: "classic-sports-car-colouring-book-vol-3",
-      title: "Classic & Sports Car Colouring Book",
+      id: "inkwise-volume-3",
+      title: "New Collection",
       volume: "Volume 3",
       category: "Colouring Books",
       subcategory: "Vehicles",
       status: "coming",
       number: "03",
-      description: "A future collection featuring classic and sports car designs.",
-      tags: ["Classic cars", "Sports cars", "Vehicles", "Coming soon"],
+      description: "A new Inkwise colouring book is on the way. More details coming soon.",
+      tags: ["Coming soon"],
       editions: []
     },
     {
-      id: "trucks-off-road-4x4-colouring-book-vol-4",
-      title: "Trucks & Off-Road 4×4s Colouring Book",
+      id: "inkwise-volume-4",
+      title: "New Collection",
       volume: "Volume 4",
       category: "Colouring Books",
       subcategory: "Vehicles",
       status: "coming",
       number: "04",
-      description: "A future collection of powerful trucks, off-road 4×4s, pickup trucks and adventure-ready vehicles.",
-      tags: ["Trucks", "Off-road 4×4s", "Pickup trucks", "Vehicles", "Coming soon"],
+      description: "Another new Inkwise colouring book is in development. Stay tuned.",
+      tags: ["Coming soon"],
       editions: []
     }
   ];
@@ -756,7 +708,7 @@
     menuToggle.textContent = "☰";
   }));
 
-  // Hero trending-books carousel: one supplied cover plus four editable placeholders.
+  // Trending Books carousel: automatically loops between the two landscape editions.
   const heroSlider = document.getElementById("heroBookSlider");
   if (heroSlider) {
     const heroSlides = [...heroSlider.querySelectorAll(".hero-book-slide")];
