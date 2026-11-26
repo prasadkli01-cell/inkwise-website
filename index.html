@@ -847,3 +847,692 @@
     }
   </style>
 </head>
+
+  <body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="logo-wrap" href="#home" aria-label="Inkwise home">
+      <img src="logo.png" alt="Inkwise">
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#collections">Collections</a>
+      <a href="#library">Books</a>
+      <a href="#about">About Inkwise</a>
+      <a href="#store">Choose Store</a>
+    </nav>
+
+    <div class="nav-tools">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" title="Toggle theme">☾</button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Independent publishing brand</div>
+        <h1>A world of<br>books.<br><span>Endless<br>possibilities.</span></h1>
+        <p class="hero-copy">From creative colouring books to engaging stories, relaxing activities and more, discover a growing collection of books from Inkwise.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#library">Explore our books</a>
+          <a class="btn btn-secondary" href="#about">Discover Inkwise</a>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="hero-cover" id="heroBookSlider" aria-label="Trending Books">
+          <span class="trending-label">Trending Books</span>
+
+          <div class="hero-book-slide active">
+            <img src="volume-1-small.jpg" alt="Inkwise Car Colouring Book Volume 1 Small Edition cover">
+          </div>
+
+          <div class="hero-book-slide">
+            <img src="volume-2-small.jpg" alt="Inkwise Vintage Car Colouring Book Volume 2 Small Edition cover">
+          </div>
+
+          <div class="hero-book-dots" aria-hidden="true">
+            <span class="active"></span><span></span>
+          </div>
+        </div>
+
+        <div class="mini-collections">
+          <a class="mini-tile" href="#library" data-filter-link="Colouring Books">
+            <strong>Colouring Books</strong><span>Explore collection</span>
+          </a>
+          <a class="mini-tile" href="#library" data-filter-link="Activity Books">
+            <strong>Activity Books</strong><span>Coming collection</span>
+          </a>
+          <a class="mini-tile" href="#library" data-filter-link="Relaxing and Reading Books">
+            <strong>Relaxing &amp; Reading</strong><span>Coming collection</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stripe"></div>
+
+  <section class="collections-section" id="collections">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-label">Collections</div>
+        <h2>Explore our collections.</h2>
+        <p class="section-intro">Different interests. Different experiences. One growing world of books.</p>
+      </div>
+
+      <div class="category-grid">
+        <a class="category-card" href="#library" data-filter-link="Colouring Books">
+          <div class="category-number">01</div>
+          <h3>Colouring Books</h3>
+          <p>Creative colouring experiences for different interests, ages and styles.</p>
+          <span class="category-link">Explore →</span>
+        </a>
+
+        <a class="category-card" href="#library" data-filter-link="Activity Books">
+          <div class="category-number">02</div>
+          <h3>Activity Books</h3>
+          <p>Puzzles, challenges, tasks and engaging activities.</p>
+          <span class="category-link">Explore · Coming soon →</span>
+        </a>
+
+        <a class="category-card" href="#library" data-filter-link="Relaxing and Reading Books">
+          <div class="category-number">03</div>
+          <h3>Relaxing and Reading Books</h3>
+          <p>Calming creative experiences, stories and enjoyable reading.</p>
+          <span class="category-link">Explore · Coming soon →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="library-section" id="library">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-label">Library</div>
+        <h2>The Inkwise library.</h2>
+        <p class="section-intro">Discover the books that bring every Inkwise collection to life.</p>
+      </div>
+
+      <div class="library-navigation">
+        <div class="filter-row" id="filters" aria-label="Main book categories">
+          <button class="filter-btn active" data-filter="All">All Books</button>
+          <button class="filter-btn" data-filter="Colouring Books">Colouring Books</button>
+          <button class="filter-btn" data-filter="Activity Books">Activity Books</button>
+          <button class="filter-btn" data-filter="Relaxing and Reading Books">Relaxing &amp; Reading Books</button>
+        </div>
+
+        <div class="subcategory-panel" id="colouringSubcategories" hidden aria-label="Colouring book subcategories">
+          <div class="subcategory-label">Explore colouring books by category</div>
+          <button class="subcategory-btn active" data-subcategory="All">All Colouring Books</button>
+          <button class="subcategory-btn" data-subcategory="Vehicles">Vehicles</button>
+          <button class="subcategory-btn" data-subcategory="Kids Special">Kids Special</button>
+          <button class="subcategory-btn" data-subcategory="Animals &amp; Nature">Animals &amp; Nature</button>
+          <button class="subcategory-btn" data-subcategory="Relaxation &amp; Mandalas">Relaxation &amp; Mandalas</button>
+          <button class="subcategory-btn" data-subcategory="Architecture &amp; Places">Architecture &amp; Places</button>
+          <button class="subcategory-btn" data-subcategory="Fantasy &amp; Imagination">Fantasy &amp; Imagination</button>
+        </div>
+      </div>
+
+      <div class="library-tools">
+        <div class="search-row">
+          <input class="search-input" id="bookSearch" type="search" placeholder="Search books and collections..." aria-label="Search books">
+        </div>
+        <button class="coming-filter" id="comingFilter" type="button" aria-pressed="false">Coming Soon</button>
+      </div>
+
+      <div class="library-slider-controls" aria-label="Library slider controls">
+        <button class="library-slider-btn" id="libraryPrev" type="button" aria-label="Previous books">‹</button>
+        <button class="library-slider-btn" id="libraryNext" type="button" aria-label="Next books">›</button>
+      </div>
+
+      <div class="book-grid" id="bookGrid" aria-live="polite" tabindex="0" aria-label="Books. Swipe or scroll horizontally to browse."></div>
+      <p class="empty-state" id="emptyState" hidden>No books found in this collection yet.</p>
+    </div>
+  </section>
+
+  <div class="stripe"></div>
+
+  <section class="values-section">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-label">The Inkwise spirit</div>
+        <h2>More than just books.</h2>
+        <p class="section-intro">Every Inkwise collection is designed around creativity, discovery and enjoyable experiences.</p>
+      </div>
+
+      <div class="values-grid">
+        <article class="value-card">
+          <div class="number">01</div>
+          <h3>Creative variety</h3>
+          <p>Different themes and formats for different interests.</p>
+        </article>
+
+        <article class="value-card">
+          <div class="number">02</div>
+          <h3>Growing collections</h3>
+          <p>A publishing catalogue that grows with fresh ideas.</p>
+        </article>
+
+        <article class="value-card">
+          <div class="number">03</div>
+          <h3>Made for exploration</h3>
+          <p>Books that encourage readers to discover, imagine and enjoy.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section" id="about">
+    <div class="container feature-layout">
+      <div class="feature-image">
+        <img src="cover.jpg" alt="Car Colouring Book from the Inkwise Vehicles collection">
+      </div>
+
+      <div class="feature-copy">
+        <div class="section-label">Featured collection</div>
+        <h2>The car collection.</h2>
+        <p>Explore the Inkwise vehicle collection, starting with our Car Colouring Book. A creative experience for automotive enthusiasts and colouring fans.</p>
+        <p>Choose between the compact Small Edition and the larger Large Edition when both editions are available.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#library" data-filter-link="Vehicles">Explore vehicle books →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="store-section" id="store">
+    <div class="container store-panel">
+      <div class="section-label">Find your edition</div>
+      <h2>Find your book on Amazon.</h2>
+      <p class="section-intro">Choose your preferred Amazon marketplace to open the correct store when purchase links are available.</p>
+
+      <div class="store-controls">
+        <select class="store-select" id="marketplace" aria-label="Choose Amazon marketplace">
+          <option value="com">Amazon.com — United States</option>
+          <option value="co.uk">Amazon.co.uk — United Kingdom</option>
+          <option value="de">Amazon.de — Germany</option>
+          <option value="fr">Amazon.fr — France</option>
+          <option value="it">Amazon.it — Italy</option>
+          <option value="es">Amazon.es — Spain</option>
+          <option value="ca">Amazon.ca — Canada</option>
+          <option value="com.au">Amazon.com.au — Australia</option>
+          <option value="nl">Amazon.nl — Netherlands</option>
+          <option value="se">Amazon.se — Sweden</option>
+          <option value="pl">Amazon.pl — Poland</option>
+          <option value="co.jp">Amazon.co.jp — Japan</option>
+        </select>
+
+        <a class="btn btn-primary" href="#library">Browse books →</a>
+      </div>
+
+      <p class="store-note">Shopping from India? Choose Amazon.com. Inkwise paperbacks are not currently listed on Amazon.in; international shipping may apply.</p>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="container">
+      <div class="section-label">Discover Inkwise</div>
+      <h2>Your next read starts here.</h2>
+      <p>Explore the growing world of Inkwise books and find something made for your interests.</p>
+      <a class="btn btn-primary" href="#library">Explore the bookshelf →</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <a class="logo-wrap" href="#home" aria-label="Inkwise home">
+        <img src="logo.png" alt="Inkwise">
+      </a>
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#home">Home</a>
+        <a href="#collections">Collections</a>
+        <a href="#library">Books</a>
+        <a href="#about">About Inkwise</a>
+        <a href="#store">Choose Store</a>
+      </nav>
+    </div>
+
+    <p class="copyright">© 2026 Inkwise. All rights reserved.</p>
+    <p class="disclaimer">Car names, where shown, are used for identification only. Inkwise is not affiliated with any car manufacturer. Books are sold by Amazon.</p>
+  </div>
+</footer>
+<script>
+  const SHOW_ALL_BOOKS = true;
+
+  const BOOKS = [
+    {
+      id: "car-colouring-book-vol-1",
+      title: "Car Colouring Book",
+      volume: "Volume 1",
+      category: "Colouring Books",
+      subcategory: "Vehicles",
+      status: "available",
+      cover: "volume-1-small.jpg",
+      description: "Modified, sports and classic cars in bold colouring-page designs.",
+      tags: ["30 car designs", "Single-sided pages", "Ages 8+"],
+      editions: [
+        {
+          name: "Small Edition",
+          size: "8.25 × 6 inch",
+          orientation: "Landscape",
+          asin: "B0HRP47QFD",
+          url: "https://www.amazon.com/dp/B0HRP47QFD",
+          cover: "volume-1-small.jpg"
+        },
+        {
+          name: "Large Edition",
+          size: "8.5 × 11 inch",
+          orientation: "Portrait",
+          asin: "B0HSJWVCWR",
+          url: "https://www.amazon.com/dp/B0HSJWVCWR",
+          cover: "volume-1-large.jpg"
+        }
+      ]
+    },
+    {
+      id: "vintage-car-colouring-book-vol-2",
+      title: "Vintage Car Colouring Book",
+      volume: "Volume 2",
+      category: "Colouring Books",
+      subcategory: "Vehicles",
+      status: "coming",
+      number: "02",
+      cover: "volume-2-small.jpg",
+      description: "A vintage-inspired collection celebrating timeless classic cars.",
+      tags: ["45 original designs", "Classic cars", "Vehicles"],
+      editions: [
+        {
+          name: "Small Edition",
+          size: "8.25 × 6 inch",
+          orientation: "Landscape",
+          asin: "B0HSYHBGGN",
+          url: "https://www.amazon.com/dp/B0HSYHBGGN",
+          cover: "volume-2-small.jpg"
+        },
+        {
+          name: "Large Edition",
+          size: "8.5 × 11 inch",
+          orientation: "Portrait",
+          asin: "B0HSJW27BCF",
+          url: "https://www.amazon.com/dp/B0HSJW27BCF",
+          cover: "volume-2-large.jpg"
+        }
+      ]
+    },
+    {
+      id: "inkwise-volume-3",
+      title: "New Collection",
+      volume: "Volume 3",
+      category: "Colouring Books",
+      subcategory: "Vehicles",
+      status: "coming",
+      number: "03",
+      description: "A new Inkwise colouring book is on the way. More details coming soon.",
+      tags: ["Coming soon"],
+      editions: []
+    },
+    {
+      id: "inkwise-volume-4",
+      title: "New Collection",
+      volume: "Volume 4",
+      category: "Colouring Books",
+      subcategory: "Vehicles",
+      status: "coming",
+      number: "04",
+      description: "Another new Inkwise colouring book is in development. Stay tuned.",
+      tags: ["Coming soon"],
+      editions: []
+    }
+  ];
+
+  const grid = document.getElementById("bookGrid");
+  const searchInput = document.getElementById("bookSearch");
+  const emptyState = document.getElementById("emptyState");
+  const filterButtons = [...document.querySelectorAll(".filter-btn")];
+  const subcategoryButtons = [...document.querySelectorAll(".subcategory-btn")];
+  const subcategoryPanel = document.getElementById("colouringSubcategories");
+  const comingFilter = document.getElementById("comingFilter");
+
+  let activeFilter = "All";
+  let activeSubcategory = "All";
+  let comingOnly = false;
+
+  function esc(value) {
+    return String(value ?? "").replace(/[&<>"']/g, c => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+    })[c]);
+  }
+
+  function amazonUrl(asin) {
+    return `https://www.amazon.${document.getElementById("marketplace").value}/dp/${encodeURIComponent(asin)}`;
+  }
+
+  const selectedEditions = Object.create(null);
+
+  function renderBook(book) {
+    const editions = book.editions || [];
+
+    const selectedIndex = Math.min(
+      selectedEditions[book.id] || 0,
+      Math.max(0, editions.length - 1)
+    );
+
+    const selectedEdition = editions[selectedIndex];
+    const isPortrait = selectedEdition && /portrait/i.test(selectedEdition.orientation || "");
+
+    const coverSrc = selectedEdition
+      ? (selectedEdition.cover || (selectedIndex === 0 ? book.cover : ""))
+      : book.cover;
+
+    const image = coverSrc
+      ? `<img src="${esc(coverSrc)}" alt="${esc(book.title)} ${selectedEdition ? esc(selectedEdition.name) : ""} cover" onerror="this.style.display='none';this.nextElementSibling.hidden=false"><div class="placeholder-cover" hidden>${esc(book.number || "IW")}</div>`
+      : `<div class="placeholder-cover">${esc(book.number || "IW")}<small>${selectedEdition ? esc(selectedEdition.orientation).toUpperCase() + " COVER ART PREVIEW" : "COVER PREVIEW"}</small></div>`;
+
+    const tags = (book.tags || [])
+      .map(t => `<span class="tag">${esc(t)}</span>`)
+      .join("");
+
+    const editionUI = editions.length
+      ? `<div class="edition-box">
+          <div class="edition-title">Choose your edition</div>
+
+          <div class="edition-options" role="group" aria-label="Choose book edition">
+            ${editions.map((edition, index) => `
+              <button
+                type="button"
+                class="edition-option ${index === selectedIndex ? "active" : ""}"
+                data-book-id="${esc(book.id)}"
+                data-edition-index="${index}"
+                aria-pressed="${index === selectedIndex}"
+              >
+                <strong>${esc(edition.name)}</strong>
+                <small>${esc(edition.size)} · ${esc(edition.orientation)}</small>
+              </button>
+            `).join("")}
+          </div>
+
+          ${
+            selectedEdition && selectedEdition.asin
+              ? `<a class="edition-action" href="${esc(selectedEdition.url || amazonUrl(selectedEdition.asin))}" target="_blank" rel="noopener noreferrer">Buy ${esc(selectedEdition.name)} on Amazon ↗</a>`
+              : `<span class="edition-action disabled" aria-disabled="true">${selectedEdition ? esc(selectedEdition.name) + " · Coming Soon" : "Edition details coming soon"}</span>`
+          }
+        </div>`
+      : "";
+
+    return `<article class="book-card">
+      <div class="book-image ${isPortrait ? "portrait" : "landscape"}">${image}</div>
+
+      <div class="book-body">
+        <div class="book-kicker">${esc(book.category)} / ${esc(book.subcategory || "Collection")}</div>
+        <h3>${esc(book.title)}</h3>
+        <div class="book-volume">${esc(book.volume || "")}</div>
+        <p class="book-description">${esc(book.description || "")}</p>
+        <div class="tags">${tags}</div>
+        <div class="book-status ${book.status === "coming" ? "soon" : ""}">${book.status === "coming" ? "Coming soon" : "Available"}</div>
+        ${editionUI}
+      </div>
+    </article>`;
+  }
+
+  function matchesFilter(book) {
+    if (comingOnly && book.status !== "coming") return false;
+
+    if (activeFilter === "All") return true;
+    if (book.category !== activeFilter) return false;
+
+    if (activeFilter === "Colouring Books" && activeSubcategory !== "All") {
+      return book.subcategory === activeSubcategory;
+    }
+
+    return true;
+  }
+
+  function renderBooks() {
+    const term = searchInput.value.trim().toLowerCase();
+
+    const results = BOOKS.filter(book => {
+      const isDisplayed = SHOW_ALL_BOOKS || book.id === "car-colouring-book-vol-1";
+
+      const text = [
+        book.title,
+        book.volume,
+        book.category,
+        book.subcategory,
+        book.description,
+        ...(book.tags || [])
+      ].join(" ").toLowerCase();
+
+      return isDisplayed && matchesFilter(book) && text.includes(term);
+    });
+
+    grid.innerHTML = results.map(renderBook).join("");
+    grid.scrollTo({ left:0, behavior:"auto" });
+    emptyState.hidden = results.length > 0;
+    updateLibrarySliderButtons();
+  }
+
+  const libraryPrev = document.getElementById("libraryPrev");
+  const libraryNext = document.getElementById("libraryNext");
+
+  function updateLibrarySliderButtons() {
+    const maxScroll = grid.scrollWidth - grid.clientWidth;
+    libraryPrev.disabled = grid.scrollLeft <= 2;
+    libraryNext.disabled = grid.scrollLeft >= maxScroll - 2;
+  }
+
+  libraryPrev.addEventListener("click", () => {
+    grid.scrollBy({
+      left:-Math.max(240, grid.clientWidth * 0.8),
+      behavior:"smooth"
+    });
+  });
+
+  libraryNext.addEventListener("click", () => {
+    grid.scrollBy({
+      left:Math.max(240, grid.clientWidth * 0.8),
+      behavior:"smooth"
+    });
+  });
+
+  grid.addEventListener("scroll", updateLibrarySliderButtons, { passive:true });
+  window.addEventListener("resize", updateLibrarySliderButtons);
+
+  grid.addEventListener("click", event => {
+    const option = event.target.closest(".edition-option");
+    if (!option) return;
+
+    selectedEditions[option.dataset.bookId] = Number(option.dataset.editionIndex) || 0;
+    renderBooks();
+  });
+
+  function setFilter(filter) {
+    const subcategoryNames = [
+      "Vehicles",
+      "Kids Special",
+      "Animals & Nature",
+      "Relaxation & Mandalas",
+      "Architecture & Places",
+      "Fantasy & Imagination"
+    ];
+
+    if (subcategoryNames.includes(filter)) {
+      activeFilter = "Colouring Books";
+      activeSubcategory = filter;
+    } else {
+      activeFilter = filter;
+      activeSubcategory = "All";
+    }
+
+    filterButtons.forEach(button =>
+      button.classList.toggle("active", button.dataset.filter === activeFilter)
+    );
+
+    subcategoryPanel.hidden = activeFilter !== "Colouring Books";
+
+    subcategoryButtons.forEach(button =>
+      button.classList.toggle("active", button.dataset.subcategory === activeSubcategory)
+    );
+
+    renderBooks();
+  }
+
+  filterButtons.forEach(button =>
+    button.addEventListener("click", () => setFilter(button.dataset.filter))
+  );
+
+  subcategoryButtons.forEach(button =>
+    button.addEventListener("click", () => {
+      activeSubcategory = button.dataset.subcategory;
+
+      subcategoryButtons.forEach(item =>
+        item.classList.toggle("active", item === button)
+      );
+
+      renderBooks();
+    })
+  );
+
+  comingFilter.addEventListener("click", () => {
+    comingOnly = !comingOnly;
+    comingFilter.classList.toggle("active", comingOnly);
+    comingFilter.setAttribute("aria-pressed", String(comingOnly));
+    renderBooks();
+  });
+
+  document.querySelectorAll("[data-filter-link]").forEach(link => {
+    link.addEventListener("click", () => {
+      const filter = link.dataset.filterLink;
+      setFilter(filter);
+    });
+  });
+
+  searchInput.addEventListener("input", renderBooks);
+  document.getElementById("marketplace").addEventListener("change", renderBooks);
+
+  // Theme toggle
+  const themeToggle = document.getElementById("themeToggle");
+
+  function setTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    themeToggle.textContent = theme === "dark" ? "☀" : "☾";
+    themeToggle.setAttribute(
+      "aria-label",
+      theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+    );
+
+    try {
+      localStorage.setItem("inkwise-theme", theme);
+    } catch (_) {}
+  }
+
+  let savedTheme = "";
+
+  try {
+    savedTheme = localStorage.getItem("inkwise-theme") || "";
+  } catch (_) {}
+
+  setTheme(savedTheme === "dark" ? "dark" : "light");
+
+  themeToggle.addEventListener("click", () => {
+    setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+  });
+
+  // Amazon marketplace preference
+  const marketplace = document.getElementById("marketplace");
+  const marketOptions = [...marketplace.options].map(o => o.value);
+
+  function suggestedMarket() {
+    const lang = (navigator.language || "").toLowerCase();
+
+    if (lang.includes("en-gb")) return "co.uk";
+    if (lang.startsWith("de")) return "de";
+    if (lang.startsWith("fr")) return "fr";
+    if (lang.startsWith("it")) return "it";
+    if (lang.startsWith("es")) return "es";
+    if (lang.includes("en-ca")) return "ca";
+    if (lang.includes("en-au")) return "com.au";
+    if (lang.startsWith("ja")) return "co.jp";
+
+    return "com";
+  }
+
+  try {
+    const savedMarket = localStorage.getItem("inkwise-marketplace");
+    marketplace.value = marketOptions.includes(savedMarket)
+      ? savedMarket
+      : suggestedMarket();
+  } catch (_) {
+    marketplace.value = suggestedMarket();
+  }
+
+  marketplace.addEventListener("change", () => {
+    try {
+      localStorage.setItem("inkwise-marketplace", marketplace.value);
+    } catch (_) {}
+
+    renderBooks();
+  });
+
+  // Mobile navigation
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  menuToggle.addEventListener("click", () => {
+    const isOpen = navLinks.classList.toggle("open");
+
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+    menuToggle.textContent = isOpen ? "×" : "☰";
+  });
+
+  navLinks.querySelectorAll("a").forEach(a =>
+    a.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.textContent = "☰";
+    })
+  );
+
+  // Trending books carousel
+  const heroSlider = document.getElementById("heroBookSlider");
+
+  if (heroSlider) {
+    const heroSlides = [...heroSlider.querySelectorAll(".hero-book-slide")];
+    const heroDots = [...heroSlider.querySelectorAll(".hero-book-dots span")];
+    let heroSlideIndex = 0;
+
+    window.setInterval(() => {
+      heroSlides[heroSlideIndex].classList.remove("active");
+
+      if (heroDots[heroSlideIndex]) {
+        heroDots[heroSlideIndex].classList.remove("active");
+      }
+
+      heroSlideIndex = (heroSlideIndex + 1) % heroSlides.length;
+
+      heroSlides[heroSlideIndex].classList.add("active");
+
+      if (heroDots[heroSlideIndex]) {
+        heroDots[heroSlideIndex].classList.add("active");
+      }
+    }, 3000);
+  }
+
+  renderBooks();
+</script>
+</body>
+</html>
