@@ -104,13 +104,14 @@ h1 span{color:var(--orange)}
 .hero-book-dots span.active{width:16px;border-radius:5px;background:var(--orange)}
 
 .mini-collections{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
-.mini-tile{aspect-ratio:1/1;min-height:0;padding:12px;border-radius:8px;background-color:#f5efdf;background-repeat:no-repeat;background-position:center top;background-size:100% auto;border:1px solid var(--line);border-left:4px solid var(--orange);display:flex;flex-direction:column;justify-content:flex-end;box-shadow:var(--shadow);overflow:hidden;transition:transform .2s}
+.mini-tile{padding:0;border-radius:8px;background:#f5efdf;border:1px solid var(--line);border-left:4px solid var(--orange);display:flex;flex-direction:column;justify-content:flex-start;box-shadow:var(--shadow);overflow:hidden;transition:transform .2s;min-width:0}
 .mini-tile:hover{transform:translateY(-3px)}
-.mini-tile.tile-colouring{background-image:url("tile-colouring.jpg")}
-.mini-tile.tile-activity{background-image:url("tile-activity.jpg")}
-.mini-tile.tile-relaxing{background-image:url("tile-relaxing.jpg")}
-.mini-tile strong{font-family:var(--heading);font-style:italic;text-transform:uppercase;font-size:17px;line-height:1;color:#171819}
-.mini-tile span{color:#69665f;font-size:10px;margin-top:5px}
+.mini-tile::before{content:"";display:block;flex:0 0 auto;width:100%;aspect-ratio:100/72;background-repeat:no-repeat;background-position:center top;background-size:100% auto}
+.mini-tile.tile-colouring::before{background-image:url("tile-colouring.jpg")}
+.mini-tile.tile-activity::before{background-image:url("tile-activity.jpg")}
+.mini-tile.tile-relaxing::before{background-image:url("tile-relaxing.jpg")}
+.mini-tile strong{display:block;padding:10px 12px 0;font-family:var(--heading);font-style:italic;text-transform:uppercase;font-size:17px;line-height:1;color:#171819}
+.mini-tile span{display:block;padding:5px 12px 12px;color:#69665f;font-size:10px}
 
 .stripe{height:9px;background:linear-gradient(90deg,var(--orange) 0 34%,var(--teal) 34% 68%,var(--sand) 68% 100%)}
 
@@ -280,8 +281,8 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:26px 0}
   .hero-grid{grid-template-columns:1fr;gap:27px}
   h1{font-size:clamp(53px,14vw,76px)}
   .hero-cover{height:auto;aspect-ratio:1.25}
-  .mini-tile{padding:9px}
-  .mini-tile strong{font-size:14px}
+  .mini-tile strong{font-size:14px;padding:8px 9px 0}
+  .mini-tile span{padding:4px 9px 9px}
   section{padding:52px 0}
   .category-grid,.values-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .filter-row{gap:7px}
